@@ -1,0 +1,105 @@
+CREATE SEQUENCE id_campus_seq;
+CREATE SEQUENCE id_postulante_seq;
+CREATE SEQUENCE id_postulante_postulacion_seq;
+CREATE SEQUENCE _area_seq2;
+CREATE SEQUENCE id_area_postulacion_seq;
+CREATE SEQUENCE id_participante_seq;
+CREATE SEQUENCE id_coordinador_seq;
+CREATE SEQUENCE id_colaborador_seq;
+CREATE SEQUENCE id_noticia_seq;
+
+CREATE TABLE Campus(
+Id_campus INTEGER PRIMARY KEY DEFAULT NEXTVAL('id_campus_seq'),
+Nombre VARCHAR(30)
+);
+ALTER SEQUENCE id_campus_seq OWNED BY Campus.Id_campus;
+
+
+
+CREATE TABLE Carrera(
+Codigo_carrera INTEGER NOT NULL ,
+Id_Campus INTEGER ,
+Nombre VARCHAR(30),
+  primary key(Codigo_carrera,Id_Campus)
+);
+
+
+
+CREATE TABLE Usuario(
+Rol VARCHAR(20) PRIMARY KEY,
+Codigo_carrera INTEGER,
+Id_Campus INTEGER ,
+Rut VARCHAR(20),
+Nombre VARCHAR(30),
+Apellido VARCHAR(30),
+Password VARCHAR(20),
+Correo VARCHAR(30),
+Telefono VARCHAR(20),
+    FOREIGN KEY (Codigo_carrera, Id_Campus) REFERENCES Carrera(Codigo_carrera, Id_Campus) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+
+
+CREATE TABLE Postulante(
+Id_postulante INTEGER PRIMARY KEY DEFAULT NEXTVAL('id_postulante_seq'),
+Rol VARCHAR(20) references Usuario(Rol) ON DELETE CASCADE ON UPDATE CASCADE
+);
+ALTER SEQUENCE id_postulante_seq OWNED BY Postulante.Id_postulante;
+
+CREATE TABLE Postulacion(
+Id_postulante INTEGER  DEFAULT NEXTVAL('id_postulante_postulacion_seq'),
+Id_Area INTEGER DEFAULT NEXTVAL('id_area_postulacion_seq'),
+Motivo TEXT,
+Preferencia INTEGER,
+Fecha_postulacion VARCHAR(20),
+PRIMARY KEY (Id_postulante,Id_Area)
+);
+
+ALTER SEQUENCE id_postulante_postulacion_seq OWNED BY Postulacion.Id_postulante;
+ALTER SEQUENCE id_area_postulacion_seq OWNED BY Postulacion.Id_Area;
+
+
+CREATE TABLE Area(
+Id_Area INTEGER PRIMARY KEY DEFAULT 
+NEXTVAL('_area_seq2'),
+Nombre VARCHAR(20),
+Inicio VARCHAR(20),
+Final VARCHAR(20),
+N_colaboradores_estimado INTEGER,
+N_colaboradores INTEGER
+);
+ALTER SEQUENCE _area_seq2 OWNED BY Area.Id_Area;
+
+CREATE TABLE Participante(
+Id_participante INTEGER PRIMARY KEY DEFAULT NEXTVAL('id_participante_seq'),
+Rol VARCHAR(20) references Usuario(Rol) ON DELETE CASCADE ON UPDATE CASCADE,
+Tipo_participante VARCHAR(20),
+Talla_Polera VARCHAR(2)
+);
+ALTER SEQUENCE id_participante_seq OWNED BY Participante.Id_participante;
+
+CREATE TABLE Coordinador(
+Id_coordinador INTEGER PRIMARY KEY DEFAULT NEXTVAL('id_coordinador_seq'),
+Id_participante INTEGER references Participante(Id_participante) ON DELETE CASCADE ON UPDATE CASCADE,
+Es_general INTEGER
+);
+ALTER SEQUENCE id_coordinador_seq OWNED BY Coordinador.Id_coordinador;
+
+
+CREATE TABLE Colaboradores(
+Id_colaborador INTEGER PRIMARY KEY DEFAULT NEXTVAL('id_colaborador_seq'),
+Id_participante INTEGER references Participante(Id_participante) ON DELETE CASCADE ON UPDATE CASCADE,
+Id_coordinador INTEGER references Coordinador(Id_coordinador) ON DELETE CASCADE ON UPDATE CASCADE
+
+);
+ALTER SEQUENCE id_colaborador_seq OWNED BY Colaboradores.Id_colaborador;
+
+CREATE TABLE Noticias(
+Id_noticia INTEGER PRIMARY KEY DEFAULT NEXTVAL('id_noticia_seq'),
+Id_Area INTEGER references Area(Id_Area) ON DELETE CASCADE ON UPDATE CASCADE,
+Id_coordinador INTEGER references Coordinador(Id_coordinador) ON DELETE CASCADE ON UPDATE CASCADE,
+Titulo VARCHAR(20),
+Contenido TEXT
+);
+ALTER SEQUENCE id_noticia_seq OWNED BY Noticias.Id_noticia;
