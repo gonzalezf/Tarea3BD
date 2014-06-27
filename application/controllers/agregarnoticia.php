@@ -1,10 +1,10 @@
 <?php
-    class Agregararea extends CI_Controller
+    class Agregarnoticia extends CI_Controller
     {
 
         function index()
         {
-            $this->load->view('agregararea');
+            $this->load->view('Agregarnoticia');
         }
         function save()
         {
@@ -12,9 +12,9 @@
 
              if($this->input->post('submit'))
             {
-                $this->user->agregararea();                
+                $this->user->agregarnoticia();                
             }
-            redirect('Administrarareas'); 
+            redirect('Administrarnoticias'); 
         }
     }
 ?>

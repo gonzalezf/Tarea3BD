@@ -13,7 +13,7 @@
 
              
 
-            echo ' el id area es '.$id_area.'!';
+           // echo ' el id area es '.$id_area.'!';
             $this->load->view('editararea',$data);
         }
 
@@ -24,9 +24,9 @@
 
              if($this->input->post('submit'))
             {
-                $this->user->agregararea();                
+                $this->user->editararea();                
             }
-            redirect('Editararea'); 
+            redirect('Administrarareas'); 
         }
     }
 ?>

@@ -4,15 +4,11 @@
    <title>JIM 2015</title>
  </head>
  <body>
-   <h1>Coordinadores </h1>
-  
+   <h1>Areas </h1>
+</br>
 
 <?php
-echo'AQUII!';
-//var_dump($data2);
-var_dump($this->session->userdata('rol'));
-echo 'probando';
-echo $this->session->userdata('rol');
+
 echo '<table>';
 foreach($groups as $row)
 {
@@ -20,17 +16,9 @@ foreach($groups as $row)
 
 	echo '<tr>';
 	echo '<td>';
-	echo'<a href="'.$row->rol.'">'.$row->rol.'</a>';
+	echo'<a href="/Jim/index.php/verpostulantes/index/'.$row->id_area.'">'.$row->nombre.'</a>';
 		echo '</td>';
-		echo '<td>';
-	echo''.$row->talla_polera.'';
-		echo '</td>';
-	echo '<td>';
-	echo '<a href="/jim/index.php/editarcoordinador/index/'.$row->rol.'"> Editar </a>';
-		echo '</td>';
-	echo '<td>';
-	echo '<a href="/jim/index.php/eliminarcoordinador/index/'.$row->rol.'"> Eliminar </a>';
-	echo '</td>';
+
 	echo'</tr>';
 
 	
@@ -47,13 +35,6 @@ foreach($groups as $row)
 echo '</table>';	
 ?>
 
-
-
-
-
-
-
-   
-   <a href="/jim/index.php/agregarcoordinador/index">Agregar Coordinador </a>
+ 
  </body>
 </html>

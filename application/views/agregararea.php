@@ -32,7 +32,7 @@
 
                
             <tr>
-                <td><input type="submit" name="submit" value="submit"></input></td>
+                <td><input type="submit" name="submit" value="Agregar Area"></input></td>
             </tr>        
         </table>
     <?php

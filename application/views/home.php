@@ -9,11 +9,11 @@
    <a href="#">Mis Datos</a>
    <a href="administrarareas/index">Areas</a>
 <a href="administrarcoordinadores/index">Coordinadores de Area</a>
-<a href="#">Noticias</a>
-<a href="#">Postulante</a>
+<a href="administrarnoticias/index">Noticias</a>
+<a href="administrarpostulantes/index">Postulante</a>
 <a href="#">Mis Datos</a>
-<a href="#">Colaboradores</a>
-<a href="#">Seleccionados</a>
+<a href="administrarcolaboradores/index">Colaboradores</a>
+
   <a href="home/logout">Cerrar Sesion</a>
  </body>
 </html>

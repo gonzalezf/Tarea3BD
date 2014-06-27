@@ -13,8 +13,11 @@ class Home extends CI_Controller {
    if($this->session->userdata('logged_in')) //si esta logueado...!
    {
      $session_data = $this->session->userdata('logged_in');
+     $this->session->set_userdata('rol', $session_data['rol']); //checkear, deberia funcionar!
+
      $data['nombre'] = $session_data['nombre'];
      $data['correo'] = $session_data['correo'];
+    
      $this->load->view('home', $data); //se llama al controlador y se envia el arreglo con la info del usuario. el controllador es home
    }
    else

@@ -23,6 +23,13 @@ Nombre VARCHAR(30),
   primary key(Codigo_carrera,Id_Campus)
 );
 
+CREATE TABLE Participante_area(
+Id_participante INTEGER NOT NULL ,
+Id_Area INTEGER NOT NULL,
+primary key(Id_participante,Id_Area)
+);
+
+
 
 
 CREATE TABLE Usuario(
