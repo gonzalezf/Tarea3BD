@@ -4,7 +4,7 @@
    <title>JIM 2015</title>
  </head>
  <body>
-   <h1>Postulantes </h1>
+   <h1>Colaboradores </h1>
 
 <?php
 echo '<table>';
@@ -66,7 +66,9 @@ echo '<td>';
 	
 	echo''.$row->id_area.'';
 		echo '</td>';
-
+	echo '<td>';
+	echo '<a href="/jim/index.php/editarpolera/index/'.$row->id_participante.'/'.$row->id_area.'">Editar Polera </a>';
+	echo '</td>';
 
 	
 

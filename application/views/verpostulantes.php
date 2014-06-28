@@ -78,11 +78,12 @@ $rol = "rol";
 	echo'<a href="/jim/index.php/seleccionar/deseleccionar/'.$id_area.'/'.$row->$rol.'"> DESELECCIONAR </a>';
 		echo '</td>';
 
-
+}
 	
  
-}
-echo '</table>';	
+
+	echo '</table>';	
+
 ?>
 
 

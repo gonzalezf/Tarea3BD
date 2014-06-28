@@ -278,6 +278,16 @@ public function ObtenerIdPostulante($rol)
       return $variable[0]->$columna;
     }
 
+
+    public function ObtenerIdAreaPolera()
+    {
+
+            $id_area = $this->input->post('id_area');
+
+ 
+      return $id_area;
+    }
+
     public function ObtenerIdCoordinador($rol)
     {
       $id_participante = $this->ObtenerIdParticipante($rol);
@@ -302,8 +312,7 @@ public function ObtenerEsGeneral($id_participante)
       return $variable[0]->$columna;
     }
 
-    
-
+     
     function Agregarnoticia()
     {
 
@@ -378,6 +387,25 @@ public function ObtenerEsGeneral($id_participante)
  
     }
 
+    function EditarPolera()
+    {
+      $talla_polera = $this->input->post('talla_polera');
+      $id_participante = $this->input->post('id_participante');
+      
+
+      
+      $data = array(
+
+        'talla_polera'=> $talla_polera,
+      
+    
+
+        );
+   
+      $this->db->where('id_participante',$id_participante);
+       $this->db->update('participante',$data);  
+ 
+    }
 
     function EditarCoordinador()
     {
@@ -533,6 +561,14 @@ public function ObtenerEsGeneral($id_participante)
       $query = $this->db->query("select usuario.apellido, usuario.nombre,usuario.rol,postulacion.motivo, postulante.id_postulante, usuario.codigo_carrera, postulacion.preferencia from usuario,postulante,postulacion,area,participante_area where usuario.rol = postulante.rol and postulante.id_postulante = postulacion.id_postulante and postulacion.id_area = area.id_area and area.id_area = '".$id_area."'");
       return $query->result();
     }
+
+    public function RetornarNombreUsuario($id_participante){
+      $query = $this->db->query(" select nombre from  participante, usuario where usuario.rol = participante.rol and participante.id_participante = '".$id_participante."' ");
+      $columna = 'nombre';
+      $variable = $query->result();
+      return $variable[0]->$columna;
+    }
+
 
     function ObtenerColaboradoresArea($id_area)
     {
