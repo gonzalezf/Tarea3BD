@@ -10,6 +10,8 @@ class Home extends CI_Controller {
 
  function index()
  {
+              $this->load->model('user');
+
    if($this->session->userdata('logged_in')) //si esta logueado...!
    {
      $session_data = $this->session->userdata('logged_in');
@@ -17,8 +19,33 @@ class Home extends CI_Controller {
 
      $data['nombre'] = $session_data['nombre'];
      $data['correo'] = $session_data['correo'];
+     if($this->user->VerificarParticipacion($session_data['rol'])==1) //esta participando en algo (coordinador o colaborador)
+     {
+      if($this->user->VerificarCoordinacion($session_data['rol'])==1)
+      {
+        //es coordinador (general o de area)
+                $id_participante = $this->user->ObtenerIdParticipante($session_data['rol']);
+       $this->session->set_userdata('id_participante', $id_participante); 
+        $this->load->view('home', $data); //se llama al controlador y se envia el arreglo con la info del usuario. el controllador es home
+
+      }
+      else
+      {
+
+        $id_participante = $this->user->ObtenerIdParticipante($session_data['rol']);
+       $this->session->set_userdata('id_participante', $id_participante); 
+
+        $data['noticias'] = $this->user->MostrarNoticiasColaborador($id_participante);
+        
+        $this->load->view('homecolaborador',$data); //retornar a home colaborador
+      }
+     }
+     else{
+        $this->load->view('homepostulante',$data); //retornar a no seleccionado
+     }
     
-     $this->load->view('home', $data); //se llama al controlador y se envia el arreglo con la info del usuario. el controllador es home
+  
+
    }
    else
    {

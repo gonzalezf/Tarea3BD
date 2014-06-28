@@ -58,11 +58,12 @@ $rol = "rol";
 		echo '</td>';
 
 	echo '<td>';
-	if($this->user->VerificarParticipacion($rol)==0){
-		echo 'no seleccionado :O';
+	if($this->user->VerificarParticipacion($row->$rol)==0){
+		echo 'no seleccionado :O '.$this->user->VerificarParticipacion($row->rol).'';
 	}
 	else{
-		$id_participante = $this->user->ObtenerIdParticipante($rol);
+		
+		$id_participante = $this->user->ObtenerIdParticipante($row->$rol);
 		echo $this->user->FueSeleccionado($id_area, $id_participante);	
 	}
 

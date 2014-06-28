@@ -23,7 +23,19 @@
               </tr>
             	<tr>
                 <td>Talla de Polera:</td>
-                <td><input type="text" name="talla_polera"  ></input></td>
+               <!-- <td><input type="text" name="talla_polera"  ></input></td>-->
+               <?php 
+
+                $options = array(
+                  '-' => 'Escoge tu talla..',
+                  'XS' => 'XS',
+                  'S' => 'S',
+                  'M' => 'M',
+                  'L' => 'L',
+                  'XL' =>'XL'
+                  );
+                echo form_dropdown('talla_polera', $options, '-');
+               ?>
              	</tr>
              	
              

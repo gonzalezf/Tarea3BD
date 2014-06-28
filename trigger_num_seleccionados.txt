@@ -1,0 +1,15 @@
+DROP TRIGGER IF EXISTS trigger_num_seleccionados ON participante_area;
+
+CREATE TRIGGER trigger_num_seleccionados
+AFTER INSERT ON participante_area
+
+	
+	DECLARE n_colaboradores_estimado INT
+	DECLARE @id_area INT
+	SELECT @id_area = id_area FROM participante_area
+	SELECT @n_colaboradores_estimados = n_colaboradores_estimado  FROM area WHERE id_area = @id_area
+
+
+	
+	UPDATE area SET n_colaboradores_estimados = @n_colaboradores_estimados+1  WHERE id_area = @id_area
+	

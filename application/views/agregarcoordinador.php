@@ -32,8 +32,8 @@
                 <td><input type="text" name="codigocarrera"></input></td>
               </tr> 
               <tr>
-                <td>Campus: (1 san joaquin, 2 vitacura) Este campo debe desaparecer</td>
-                <td><input type="text" name="id_campus"></input></td>
+             <!--   <td>Campus: (1 san joaquin, 2 vitacura) Este campo debe desaparecer</td>
+                <td><input type="text" name="id_campus"></input></td>-->
               </tr>   
               <tr>
               <tr>

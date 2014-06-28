@@ -29,11 +29,25 @@
            		</tr>    
            		<tr>
                 <td>Carrera: (735 informatica) </td>
-                <td><input type="text" name="codigocarrera"></input></td>
+                <!--<td><input type="text" name="codigocarrera"></input></td>
+-->
+                <?php 
+                $options = array(
+                      '0' => 'Escoge tu carrera.. ',
+                      '73' => 'Informatica',
+                      '11' => 'Civil',
+                      '04' => 'Plan Comun',
+                      '23' => 'Electrica',
+                      '51' => 'Quimica',
+                      '66'=>'Comercial',
+                      '60' => 'Industrial'
+                  );
+                echo form_dropdown('codigocarrera', $options, '0');
+                ?>
            		</tr> 
            		<tr>
-                <td>Campus: (1 san joaquin, 2 vitacura) Este campo debe desaparecer</td>
-                <td><input type="text" name="id_campus"></input></td>
+              <!--  <td>Campus: (1 san joaquin, 2 vitacura) Este campo debe desaparecer</td>
+                <td><input type="text" name="id_campus"></input></td>-->
            		</tr>   
             	<tr>
             	<tr>

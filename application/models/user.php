@@ -39,6 +39,26 @@ Class User extends CI_Model
        return 0;
      }
    }
+
+   function VerificarCoordinacion($rol) //verificar participacion en algo. 1 si esta participando, 0 si no.
+   {
+     $this -> db -> select('tipo_participante');
+     $this -> db -> from('participante');
+     $this -> db -> where('rol', $rol);
+
+
+     $query = $this -> db -> get();
+     $variable = $query->result();
+     $columna = 'tipo_participante';
+     $tipo = $variable[0]->$columna;
+     if(strcmp($tipo,'coordinador')==0){
+      return 1;
+     }
+     else{
+      return 0;
+     }
+     
+   }
    function FueSeleccionado($id_area, $id_participante)
    {
      $this -> db -> select('*');
@@ -125,7 +145,8 @@ public function ObtenerIdPostulante($rol)
       $rol = $this->input->post('rol');
       $rut = $this->input->post('rut');
       $codigocarrera = $this->input->post('codigocarrera');
-      $id_campus = $this->input->post('id_campus');
+      //$id_campus = $this->input->post('id_campus');
+      $id_campus = $this->ObtenerIdCampus($codigocarrera);
       $email = $this->input->post('email');
       $telefono = $this->input->post('telefono');
       $preferencia1 = $this->input->post('preferencia1');
@@ -278,6 +299,18 @@ public function ObtenerIdPostulante($rol)
       return $variable[0]->$columna;
     }
 
+    public function ObtenerIdCampus($codigocarrera)
+    {
+      $this->db->select('id_campus');
+      $this->db->from('carrera');
+      $this->db->where('codigo_carrera',$codigocarrera);
+      $query = $this->db->get();
+      $variable = $query->result();
+      $columna = 'id_campus';
+      //return $variable[0]->'id_participante';
+      return $variable[0]->$columna;
+    }
+
 
     public function ObtenerIdAreaPolera()
     {
@@ -406,6 +439,48 @@ public function ObtenerEsGeneral($id_participante)
        $this->db->update('participante',$data);  
  
     }
+    function EditarDatos()
+    {
+
+      $nombre = $this->input->post('nombre');
+      $apellido = $this->input->post('apellido');
+      $rol = $this->input->post('rol');
+      $rut = $this->input->post('rut');
+      $codigocarrera = $this->input->post('codigocarrera');
+      $id_campus = $this->input->post('id_campus');
+      $email = $this->input->post('email');
+      $telefono = $this->input->post('telefono');
+      
+    
+      $contrasenna = $this->input->post('contrasenna');
+   
+      date_default_timezone_set("America/Santiago");
+      $fecharegistro = date('Y-m-d H:i:s');
+      
+      $infousuario = array(
+
+        'rol'=> $rol,
+        'codigo_carrera' => $codigocarrera,
+        'id_campus'=>$id_campus,
+        'rut'=>$rut,
+        'nombre'=>$nombre,
+        'apellido'=>$apellido,
+        'password'=>$contrasenna,
+        'correo'=>$email,
+        'telefono'=>$telefono
+
+        );
+      
+
+    
+      
+
+      $this->db->where('rol',$rol);
+       $this->db->update('usuario',$infousuario);  
+  
+   //    $this->db->where('rol',$rol);
+     //  $this->db->update('coordinador',$infotablacoordinador);
+    }
 
     function EditarCoordinador()
     {
@@ -477,7 +552,8 @@ public function ObtenerEsGeneral($id_participante)
       $rol = $this->input->post('rol');
       $rut = $this->input->post('rut');
       $codigocarrera = $this->input->post('codigocarrera');
-      $id_campus = $this->input->post('id_campus');
+      //$id_campus = $this->input->post('id_campus');
+      $id_campus = $this->ObtenerIdCampus($codigocarrera);
       $email = $this->input->post('email');
       $telefono = $this->input->post('telefono');
       $area = $this->input->post('area'); //si el area es coordinacion general...!
@@ -547,6 +623,23 @@ public function ObtenerEsGeneral($id_participante)
       $query = $this->db->query('SELECT id_area, nombre from area');
       return $query->result();
     }
+    function MostrarNoticiasColaborador($id_participante){
+      //ver las areas en que ha sido seleccionado
+      $query = $this->db->query('select id_area from participante_area where id_participante = 25');
+      $groups = $query->result();
+      $arreglo= array();
+
+      foreach($groups as $row)
+        {
+          $id_area = $row->id_area;
+          //obtener las noticas respecto al area en cuestion.
+          $query2 = $this->db->query("select id_noticia,id_area, id_coordinador,titulo,contenido from noticias where id_area ='".$id_area."'");
+          $variable = $query2->result();
+          array_push($arreglo,$variable);
+
+        }
+    return $arreglo;
+    }
 
     function ObtenerTodosLosCoordinadores()
     {
@@ -558,7 +651,7 @@ public function ObtenerEsGeneral($id_participante)
         function ObtenerPostulantesArea($id_area)
     {
 
-      $query = $this->db->query("select usuario.apellido, usuario.nombre,usuario.rol,postulacion.motivo, postulante.id_postulante, usuario.codigo_carrera, postulacion.preferencia from usuario,postulante,postulacion,area,participante_area where usuario.rol = postulante.rol and postulante.id_postulante = postulacion.id_postulante and postulacion.id_area = area.id_area and area.id_area = '".$id_area."'");
+      $query = $this->db->query("select usuario.apellido, usuario.nombre,usuario.rol,postulacion.motivo, postulante.id_postulante, usuario.codigo_carrera, postulacion.preferencia from usuario,postulante,postulacion,area where usuario.rol = postulante.rol and postulante.id_postulante = postulacion.id_postulante and postulacion.id_area = area.id_area and area.id_area = '".$id_area."'");
       return $query->result();
     }
 
@@ -568,6 +661,21 @@ public function ObtenerEsGeneral($id_participante)
       $variable = $query->result();
       return $variable[0]->$columna;
     }
+
+     public function ObtenerNombreConRol($rol){
+      $query = $this->db->query(" select nombre from   usuario where rol = '".$rol."' ");
+      $columna = 'nombre';
+      $variable = $query->result();
+      return $variable[0]->$columna;
+    }
+        public function ObtenerApellidoConRol($rol){
+      $query = $this->db->query(" select apellido from  usuario where rol = '".$rol."' ");
+      $columna = 'apellido';
+      $variable = $query->result();
+      return $variable[0]->$columna;
+    }
+
+
 
 
     function ObtenerColaboradoresArea($id_area)

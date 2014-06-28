@@ -8,7 +8,7 @@
   
 
 
-   <a href="index.php/registro/index">Postula</a>
-   <a href="index.php/login/index">Iniciar Sesion </a>
+   <a href="/jim/index.php/registro/index">Postula</a>
+   <a href="/jim/index.php/login/index">Iniciar Sesion </a>
  </body>
 </html>

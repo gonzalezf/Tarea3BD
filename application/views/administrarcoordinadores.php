@@ -8,17 +8,25 @@
   
 
 <?php
-echo'AQUII!';
+//echo'AQUII!';
 //var_dump($data2);
-var_dump($this->session->userdata('rol'));
-echo 'probando';
-echo $this->session->userdata('rol');
+//var_dump($this->session->userdata('rol'));
+//echo 'probando';
+//echo $this->session->userdata('rol');
 echo '<table>';
+            $this->load->model('user');
+
 foreach($groups as $row)
 {
 	//              echo '<option value="'.$row->description.'">'.$row->description.'</option>';
 
 	echo '<tr>';
+	echo '<td>';
+	echo $this->user->ObtenerNombreConRol($row->rol);
+	echo '</td>';
+	echo '<td>';
+	echo $this->user->ObtenerApellidoConRol($row->rol);
+	echo '</td>';
 	echo '<td>';
 	echo'<a href="'.$row->rol.'">'.$row->rol.'</a>';
 		echo '</td>';
