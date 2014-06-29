@@ -3,6 +3,8 @@
 <title>Agregar Coordinador</title>
 </head>
 <body>
+ <?php include('application/views/barra.php');
+    ?>
     <h1>Agregar Coordinador</h1>
     <?php
 
@@ -116,7 +118,7 @@
 
 
             <tr>
-                <td><input type="submit" name="submit" value="Agregar Coordinador"></input></td>
+                <td><input type="submit" name="submit"  class="btn btn-primary" value="Agregar Coordinador"></input></td>
             </tr>        
         </table>
     <?php

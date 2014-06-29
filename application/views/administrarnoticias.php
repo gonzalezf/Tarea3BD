@@ -4,15 +4,42 @@
    <title>JIM 2015</title>
  </head>
  <body>
-   <h1>Noticias</h1>
+  <?php include('application/views/barra.php');
+    ?>
+    <div style="text-align:center;">
+       <h1>Noticias</h1>
+    </div>
+
+
 
 <?php
-echo '<table>';
+echo '<table style="width:80%; margin:auto;" class="table table-hover">';
+?>
+<thead>
+<tr>
+<th>
+Titulo
+</th>
+<th>
+Contenido
+</th>
+<th>
+Editar
+</th>
+<th>
+Eliminar
+</th>
+</tr>
+</thead>
+<tbody>
+	
+
+<?php
 foreach($groups as $row)
 {
 	//              echo '<option value="'.$row->description.'">'.$row->description.'</option>';
 
-	echo '<tr>';
+	echo '<tr >';
 	echo '<td>';
 	echo ''.$row->titulo.'';
 		echo '</td>';
@@ -25,19 +52,24 @@ foreach($groups as $row)
 	echo '<td>';
 	echo '<a href="/jim/index.php/eliminarnoticia/index/'.$row->id_noticia.'"> Eliminar </a>';
 	echo '</td>';
+		
+	
 	echo'</tr>';
+	
+
 
 	
  
 }
+echo '</tbody>';
 echo '</table>';	
 ?>
 
 
 
 
-   
-   <a href="/jim/index.php/agregarnoticia/index">Agregar Noticia</a>
+   </br>
+   <a href="/jim/index.php/agregarnoticia/index " style="float:right; margin-right:250px;" class="btn btn-primary">Agregar Noticia</a>
 
 </body>
 </html>

@@ -19,6 +19,7 @@ class Home extends CI_Controller {
 
      $data['nombre'] = $session_data['nombre'];
      $data['correo'] = $session_data['correo'];
+     $this->session->set_userdata('nombre',$session_data['nombre']);
      $id_campus = $this->user->ObtenerIdCampusUsuario($session_data['rol']); //obtener el id campus al que pertenece el usuario logueado
      $this->session->set_userdata('id_campus',$id_campus);
 

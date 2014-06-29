@@ -1,12 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
-   <title>Menu Administracion</title>
+   <title>JIM 2015</title>
  </head>
  <body>
+  <?php include('application/views/barracolaborador.php');
+    ?>
    <h1>Inicio</h1>
-   <h2>Bienvenido Colaborador: <?php echo  $nombre; ?>!</h2>
-   <a href="/jim/index.php/editardatos/".<?php ?>."">Editar Mis Datos</a>
+
+
 	<h2>Mostrar Noticias</h2>
 
 	<?php 
@@ -64,6 +66,6 @@ foreach($noticias as $row)
 echo '</table>';	
 ?>
 
-  <a href="/jim/index.php/home/logout">Cerrar Sesion</a>
+
  </body>
 </html>

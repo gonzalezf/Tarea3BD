@@ -4,8 +4,12 @@
    <title>JIM 2015</title>
  </head>
  <body>
+  <?php include('application/views/barra.php');
+    ?>
+    <div style="center;text-align:center;">
    <h1>Coordinadores </h1>
-  
+   </br>
+  </div>
 
 <?php
 //echo'AQUII!';
@@ -13,10 +17,23 @@
 //var_dump($this->session->userdata('rol'));
 //echo 'probando';
 //echo $this->session->userdata('rol');
-echo '<table>';
+echo '<table class="table table-hover">';
             $this->load->model('user');
+?>
+<thead>
+        <tr>
+          <th>Nombre </th>
+          <th>Apellido</th>
+          <th>Rol </th>
+          <th>Talla Polera</th>
+                    <th>Editar</th>
+                              <th>Eliminar</th>
 
-foreach($groups as $row)
+
+        </tr>
+      </thead>
+<tbody>
+<?php foreach($groups as $row)
 {
 	//              echo '<option value="'.$row->description.'">'.$row->description.'</option>';
 
@@ -52,7 +69,9 @@ foreach($groups as $row)
             ?>
             </select>*/
 }
-echo '</table>';	
+?>	
+</tbody>
+<?php echo '</table>';	
 ?>
 
 
@@ -62,6 +81,6 @@ echo '</table>';
 
 
    
-   <a href="/jim/index.php/agregarcoordinador/index">Agregar Coordinador </a>
+   <a href="/jim/index.php/agregarcoordinador/index" style="float:right;margin-right:80px;" class="btn btn-primary">Agregar Coordinador </a>
  </body>
 </html>

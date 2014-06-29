@@ -4,12 +4,17 @@
    <title>JIM 2015</title>
  </head>
  <body>
-   <h1>Areas </h1>
+  <?php include('application/views/barra.php');
+    ?>
+    <div style="text-align:center;">
+   <h1>Escoja el Area </h1>
+    </div>
+
 </br>
 
 <?php
 
-echo '<table>';
+echo '<table  style="width:30%;margin:auto;text-align:center;"class="table table-hover">';
 foreach($groups as $row)
 {
 	//              echo '<option value="'.$row->description.'">'.$row->description.'</option>';

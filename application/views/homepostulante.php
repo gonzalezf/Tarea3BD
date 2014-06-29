@@ -4,12 +4,11 @@
    <title>Menu Postulante</title>
  </head>
  <body>
+   <?php include('application/views/barrapostulante.php');
+    ?>
    <h1>Inicio</h1>
-   <h2>Bienvenido <?php echo  $nombre; ?>!</h2>
+
 	<h3>Estimado Postulante, aun no has sido seleccionado. Vuelve a revisar la pagina mas tarde</h3>
-   <a href="#">Mis Datos</a>
 
-
-  <a href="/jim/index.php/home/logout">Cerrar Sesion</a>
  </body>
 </html>

@@ -3,6 +3,8 @@
 <title>Editar Area</title>
 </head>
 <body>
+ <?php include('application/views/barra.php');
+    ?>
     <h1>Editar Polera</h1>
     <?php
 //var_dump($InfoArea);
@@ -41,7 +43,7 @@
              
                
             <tr>
-                <td><input type="submit" name="submit" value="Editar Talla de Polera"></input></td>
+                <td><input type="submit" name="submit"  class="btn btn-primary" value="Editar Talla de Polera"></input></td>
             </tr>        
         </table>
     <?php

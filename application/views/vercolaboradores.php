@@ -4,12 +4,53 @@
    <title>JIM 2015</title>
  </head>
  <body>
+  <?php include('application/views/barra.php');
+    ?>
+    <div style="text-align:center;">
    <h1>Colaboradores </h1>
+    </div>
+
 
 <?php
-echo '<table>';
+echo '<table class="table table-hover">';
 //var_dump($groups);
-echo 'apellido | nombre |rol | id postulante | codigo carrera | correo| telefono|talla polera |id_area ' ;
+?>
+<thead>
+	<tr>
+	<th>
+	Apellido
+	</th>
+	<th>
+	Nombre
+	</th>
+	<th>
+	Rol
+	</th>
+		<th>
+	Id postulante
+	</th>
+		<th>
+	Codigo Carrera
+	</th>
+		<th>
+	Correo
+	</th>
+		<th>
+	Telefono
+	</th>
+		<th>
+	Talla Polera
+	</th>
+		<th>
+	Id Area
+	</th>
+
+
+	</tr>
+</thead>
+<tbody>
+<?php
+
 $this->load->model('user');
 
 
@@ -67,7 +108,7 @@ echo '<td>';
 	echo''.$row->id_area.'';
 		echo '</td>';
 	echo '<td>';
-	echo '<a href="/jim/index.php/editarpolera/index/'.$row->id_participante.'/'.$row->id_area.'">Editar Polera </a>';
+	echo '<a href="/jim/index.php/editarpolera/index/'.$row->id_participante.'/'.$row->id_area.' " >Editar Polera </a>';
 	echo '</td>';
 
 	
@@ -76,6 +117,7 @@ echo '<td>';
 	
  
 }
+echo '</tbody>';
 echo '</table>';	
 ?>
 

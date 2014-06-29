@@ -3,6 +3,8 @@
 <title>Editar Coordinador</title>
 </head>
 <body>
+ <?php include('application/views/barra.php');
+    ?>
     <h1>Editar Coordinador</h1>
     <?php
     $this->load->model('user');
@@ -104,7 +106,7 @@
 
 
             <tr>
-                <td><input type="submit" name="submit" value="Editar Coordinador"></input></td>
+                <td><input type="submit" name="submit"  class="btn btn-primary" value="Editar Coordinador"></input></td>
             </tr>        
         </table>
     <?php

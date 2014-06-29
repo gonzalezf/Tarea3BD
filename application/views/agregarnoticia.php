@@ -3,6 +3,8 @@
 <title>Agregar Noticia</title>
 </head>
 <body>
+ <?php include('application/views/barra.php');
+    ?>
     <h1>Agregar Noticia</h1>
     <?php
 
@@ -29,7 +31,7 @@
 
                
             <tr>
-                <td><input type="submit" name="submit" value="Agregar Noticia"></input></td>
+                <td><input type="submit" name="submit"  class="btn btn-primary"value="Agregar Noticia"></input></td>
             </tr>        
         </table>
     <?php

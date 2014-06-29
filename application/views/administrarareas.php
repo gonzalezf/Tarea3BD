@@ -4,12 +4,30 @@
    <title>JIM 2015</title>
  </head>
  <body>
+  <?php include('application/views/barra.php');
+    ?>
+    <div style="text-align:center; margin:auto;">
    <h1>Areas </h1>
+   </div>
 </br>
 
 <?php
 
-echo '<table>';
+echo '<table   style="width:60%;margin:auto;"class="table table-hover">';
+?>
+
+<thead>
+        <tr>
+          <th>Nombre </th>
+
+                    <th>Editar</th>
+                              <th>Eliminar</th>
+
+
+        </tr>
+      </thead>
+<tbody>
+<?php
 foreach($groups as $row)
 {
 	//              echo '<option value="'.$row->description.'">'.$row->description.'</option>';
@@ -37,10 +55,12 @@ foreach($groups as $row)
             ?>
             </select>*/
 }
+echo '</tbody>';
 echo '</table>';	
 ?>
 
+</br>
    
-   <a href="/jim/index.php/agregararea/index">Agregar Area </a>
+   <a href="/jim/index.php/agregararea/index"  style="float:right;margin-right:380px; " class="btn btn-primary">Agregar Area </a>
  </body>
 </html>

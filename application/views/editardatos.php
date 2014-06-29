@@ -3,6 +3,8 @@
 <title>Editar Datos</title>
 </head>
 <body>
+ <?php include('application/views/barra.php');
+    ?>
     <h1>Editar Datos</h1>
     <?php
 
@@ -78,7 +80,7 @@
 
 
             <tr>
-                <td><input type="submit" name="submit" value="Editar Datos"></input></td>
+                <td><input type="submit" name="submit"  class="btn btn-primary" value="Editar Datos"></input></td>
             </tr>        
         </table>
     <?php

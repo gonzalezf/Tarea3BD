@@ -4,13 +4,60 @@
    <title>JIM 2015</title>
  </head>
  <body>
+  <?php include('application/views/barra.php');
+    ?>
    <h1>Postulantes </h1>
 
 <?php
-echo '<table>';
+echo '<table class="table table-hover">';
 //var_dump($groups);
-echo 'apellido | nombre |rol | id postulante | codigo carrera | preferencia|motivo |estado | opcion | otra area | estado | otra area | estado ' ;
+?>
+<thead>
+	<tr>
+	<th>
+	Apellido
+	</th>
+	<th>
+	Nombre
+	</th>
+	<th>
+	Rol
+	</th>
+		<th>
+	Id postulante
+	</th>
+		<th>
+	Codigo Carrera
+	</th>
+		<th>
+	Preferencia
+	</th>
+		<th>
+	Motivo
+	</th>
+		<th>
+	Estado
+	</th>
+		<th>
+	Opcion
+	</th>
+		<th>
+	otra area
+	</th>
+		<th>
+	estado
+	</th>
+		<th>
+	otra area
+	</th>
+		<th>
+	estado
+	</th>
 
+	</tr>
+</thead>
+<tbody>
+<?php
 $this->load->model('user');
 
 
@@ -82,7 +129,7 @@ $rol = "rol";
 }
 	
  
-
+echo'</tbody>';
 	echo '</table>';	
 
 ?>

@@ -20,8 +20,7 @@
 <div class="contenedori">
 <div class="malla1inicio">
 </div>
-
- <div class="contenedorinicio">
+ <div class="contenedorinicio btn-group input-group btn-group-justified" data-toggle="buttons">
 
 
   <div class="col-md-4"> 
@@ -38,6 +37,7 @@
                      <a href="/jim/index.php/login/index" class="btn btn-default">Iniciar Sesion </a> </div>
  
   <div class="col-md-8"></div>
+
 <div class="malla2inicio">
 </div>
  </div>
