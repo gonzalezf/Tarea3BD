@@ -14,7 +14,7 @@ class Administrarcoordinadores extends CI_Controller {
 
 	{
 		
-		$data['groups'] = $this->user->ObtenerTodosLosCoordinadores();
+		$data['groups'] = $this->user->ObtenerTodosLosCoordinadores($this->session->userdata('id_campus'));
 		//$data2['probandosession'] =  $this->session->userdata('rol');
 	
 		$this->load->helper(array('form'));

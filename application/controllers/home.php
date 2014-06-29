@@ -19,6 +19,9 @@ class Home extends CI_Controller {
 
      $data['nombre'] = $session_data['nombre'];
      $data['correo'] = $session_data['correo'];
+     $id_campus = $this->user->ObtenerIdCampusUsuario($session_data['rol']); //obtener el id campus al que pertenece el usuario logueado
+     $this->session->set_userdata('id_campus',$id_campus);
+
      if($this->user->VerificarParticipacion($session_data['rol'])==1) //esta participando en algo (coordinador o colaborador)
      {
       if($this->user->VerificarCoordinacion($session_data['rol'])==1)

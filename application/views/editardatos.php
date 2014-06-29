@@ -8,7 +8,7 @@
 
      echo form_open('Editardatos/save'); //controlador/metodo
  
-
+     $this->load->model('user');
     ?>
         <table>
 
@@ -65,7 +65,7 @@
                   'L' => 'L',
                   'XL' =>'XL'
                   );
-                echo form_dropdown('talla_polera', $options, '-');
+                echo form_dropdown('talla_polera', $options, $this->user->ObtenerTallaPolera($this->user->ObtenerIdParticipante($this->session->userdata['rol'])));
                ?>
               </tr>   
 

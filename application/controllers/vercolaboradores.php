@@ -15,7 +15,7 @@ class Vercolaboradores extends CI_Controller {
         $data['title'] = 'probando data...';
                     $data['id_area'] = $id_area;
 
-        $data['groups'] = $this->user->ObtenerColaboradoresArea($id_area);
+        $data['groups'] = $this->user->ObtenerColaboradoresArea($id_area,$this->session->userdata('id_campus'));
         $this->load->helper(array('form'));
         $this->load->view('Vercolaboradores',$data);
 

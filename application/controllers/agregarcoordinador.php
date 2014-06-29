@@ -4,7 +4,9 @@
 
         function index()
         {
-            $this->load->view('agregarcoordinador');
+            $this->load->model('user');
+            $data['groups'] = $this->user->ObtenerTodasLasAreas();
+            $this->load->view('agregarcoordinador',$data);
         }
         function save()
         {

@@ -5,12 +5,14 @@
 <body>
     <h1>Editar Coordinador</h1>
     <?php
-
+    $this->load->model('user');
      echo form_open('Editarcoordinador/save'); //controlador/metodo
     ?>
         <table>
 
-              <?php echo $id_participante[0]->id_participante ?>
+              <?php 
+              
+              echo $id_participante; ?>
               
               <tr>
                 <td>Nombre:</td>
@@ -49,12 +51,48 @@
               </tr>   
               <tr>
                 <td>Area: </td>
-                <td><input type="text" name="area"></input></td>
+             <!--  <td><input type="text" name="area"></input></td>
+              -->
+              <td>
+                
+                 <?php echo '<select name="area">'; 
+        
+               
+                  
+               
+               foreach($groups as $row){
+                  echo '<option value="'.$row->nombre.'">'.$row->nombre.'</option>';
+
+
+                  }
+
+                 
+     
+                ?>
+              </select>
+              </td>
               </tr>   
 
               <tr>
                 <td>Talla Polera: </td>
-                <td><input type="text" name="tallapolera"></input></td>
+                <!--<td><input type="text" name="tallapolera"></input></td>
+              -->
+
+              <?php 
+
+                $options = array(
+                  '-' => 'Escoge tu talla..',
+                  'XS' => 'XS',
+                  'S' => 'S',
+                  'M' => 'M',
+                  'L' => 'L',
+                  'XL' =>'XL'
+                  );
+                echo form_dropdown('tallapolera', $options, $this->user->ObtenerTallaPolera($id_participante));
+               ?>
+
+              
+              </td>
               </tr>   
 
               <tr>

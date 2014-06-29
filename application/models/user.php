@@ -123,6 +123,17 @@ public function ObtenerIdPostulante($rol)
       //return $variable[0]->'id_participante';
       return $variable[0]->$columna;
     }
+    public function ObtenerIdCampusUsuario($rol)
+    {
+      $this->db->select('id_campus');
+      $this->db->from('usuario');
+      $this->db->where('rol',$rol);
+      $query = $this->db->get();
+      $variable = $query->result();
+      $columna = 'id_campus';
+      //return $variable[0]->'id_participante';
+      return $variable[0]->$columna;
+    }
     // esta funcion registra un usuario....
 
         public function ObtenerIdArea($area)
@@ -345,6 +356,31 @@ public function ObtenerEsGeneral($id_participante)
       return $variable[0]->$columna;
     }
 
+    function ObtenerTallaPolera($id_participante)
+    {
+     
+     $this->db->select('talla_polera');
+     $this->db->from('participante');
+      $this->db->where('id_participante',$id_participante);
+      $query= $this->db->get();
+      $columna = 'talla_polera';
+      $variable = $query->result();
+      return $variable[0]->$columna; 
+    }
+
+    function ObtenerAreaParticipante($id_participante)
+    {
+
+     $this->db->select('nombre');
+     $this->db->from('participante_area,area');
+     $this->db->where('participante_area.id_area','area.id_area');
+      $this->db->where('id_participante',$id_participante);
+      $query= $this->db->get();
+      $columna = 'nombre';
+      $variable = $query->result();
+      return $variable[0]->$columna; 
+    }
+
      
     function Agregarnoticia()
     {
@@ -439,6 +475,9 @@ public function ObtenerEsGeneral($id_participante)
        $this->db->update('participante',$data);  
  
     }
+
+
+
     function EditarDatos()
     {
 
@@ -641,22 +680,34 @@ public function ObtenerEsGeneral($id_participante)
     return $arreglo;
     }
 
-    function ObtenerTodosLosCoordinadores()
+   /* function ObtenerTodosLosCoordinadores()
     {
 
       $query = $this->db->query("SELECT id_participante,rol, talla_polera from participante where tipo_participante = 'coordinador'");
       return $query->result();
-    }
+    }*/
 
-        function ObtenerPostulantesArea($id_area)
+        function ObtenerTodosLosCoordinadores($id_campus)
     {
 
-      $query = $this->db->query("select usuario.apellido, usuario.nombre,usuario.rol,postulacion.motivo, postulante.id_postulante, usuario.codigo_carrera, postulacion.preferencia from usuario,postulante,postulacion,area where usuario.rol = postulante.rol and postulante.id_postulante = postulacion.id_postulante and postulacion.id_area = area.id_area and area.id_area = '".$id_area."'");
+      $query = $this->db->query("select  id_participante,participante.rol, talla_polera from participante,usuario where usuario.rol = participante.rol and usuario.id_campus = '".$id_campus."' and  tipo_participante = 'coordinador'");
+      return $query->result();
+    }
+    
+
+
+        function ObtenerPostulantesArea($id_area,$id_campus)
+    {
+
+    //  $query = $this->db->query("select usuario.apellido, usuario.nombre,usuario.rol,postulacion.motivo, postulante.id_postulante, usuario.codigo_carrera, postulacion.preferencia from usuario,postulante,postulacion,area where usuario.rol = postulante.rol and postulante.id_postulante = postulacion.id_postulante and postulacion.id_area = area.id_area and area.id_area = '".$id_area."'");
+              $query = $this->db->query("  select usuario.apellido, usuario.nombre,usuario.rol,postulacion.motivo, postulante.id_postulante, usuario.codigo_carrera, postulacion.preferencia from usuario,postulante,postulacion,area where usuario.rol = postulante.rol and postulante.id_postulante = postulacion.id_postulante and postulacion.id_area = area.id_area and usuario.id_campus = '".$id_campus."' and area.id_area = '".$id_area."'");
+
       return $query->result();
     }
 
     public function RetornarNombreUsuario($id_participante){
-      $query = $this->db->query(" select nombre from  participante, usuario where usuario.rol = participante.rol and participante.id_participante = '".$id_participante."' ");
+    $query = $this->db->query(" select nombre from  participante, usuario where usuario.rol = participante.rol and participante.id_participante = '".$id_participante."' ");
+
       $columna = 'nombre';
       $variable = $query->result();
       return $variable[0]->$columna;
@@ -678,17 +729,22 @@ public function ObtenerEsGeneral($id_participante)
 
 
 
-    function ObtenerColaboradoresArea($id_area)
+    function ObtenerColaboradoresArea($id_area,$id_campus)
     {
+     //         $query = $this->db->query("  select usuario.apellido, usuario.nombre,usuario.rol,postulacion.motivo, postulante.id_postulante, usuario.codigo_carrera, postulacion.preferencia from usuario,postulante,postulacion,area where usuario.rol = postulante.rol and postulante.id_postulante = postulacion.id_postulante and postulacion.id_area = area.id_area and usuario.id_campus = '".$id_campus."' and area.id_area = '".$id_area."'");
 
-      $query = $this->db->query("select usuario.apellido, usuario.nombre,usuario.rol,participante.id_participante, usuario.codigo_carrera, usuario.correo, usuario.telefono, participante.talla_polera,participante_area.id_area from usuario, participante,participante_area where usuario.rol = participante.rol and participante.id_participante = participante_area.id_participante  and id_area = '".$id_area."'");
+     // $query = $this->db->query("select usuario.apellido, usuario.nombre,usuario.rol,participante.id_participante, usuario.codigo_carrera, usuario.correo, usuario.telefono, participante.talla_polera,participante_area.id_area from usuario, participante,participante_area where usuario.rol = participante.rol and participante.id_participante = participante_area.id_participante  and id_area = '".$id_area."'");
+      $query = $this->db->query("select usuario.apellido, usuario.nombre,usuario.rol,participante.id_participante, usuario.codigo_carrera, usuario.correo, usuario.telefono, participante.talla_polera,participante_area.id_area from usuario, participante,participante_area where usuario.rol = participante.rol and participante.id_participante = participante_area.id_participante and usuario.id_campus = '".$id_campus."' and id_area = '".$id_area."'");
+    
       return $query->result();
     }
 
-     function ObtenerTodasLasNoticias()
+     function ObtenerTodasLasNoticias($id_campus)
     {
 
-      $query = $this->db->query("SELECT id_noticia,id_area, id_coordinador, titulo, contenido from noticias ");
+//      $query = $this->db->query("SELECT id_noticia,id_area, id_coordinador, titulo, contenido from noticias ");
+        $query = $this->db->query("select id_noticia,noticias.id_area, noticias.id_coordinador, titulo, contenido from usuario,participante,coordinador,noticias  where usuario.rol = participante.rol and participante.id_participante = coordinador.id_participante and coordinador.id_coordinador = noticias.id_coordinador and usuario.id_campus = '".$id_campus."' ");
+   
       return $query->result();
     }
 

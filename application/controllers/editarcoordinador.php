@@ -9,7 +9,7 @@
 
             $data['rol'] = $rol;
             $data['InfoArea'] = $this->user->ObtenerInfoUsuario($rol);
-          
+          $data['groups'] = $this->user->ObtenerTodasLasAreas();
             $data['id_participante'] = $this->user->ObtenerIdParticipante($rol);
           
              
