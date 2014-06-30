@@ -88,16 +88,17 @@ h3 {
 
    <?php echo form_open('verifylogin'); ?> <!-- lo envia al controlador verifylogin-->
 
-   <label for="correo">Correo Electronico: </label>
-   <input type="text" size="20" id="correo" name="correo" />
+                  
+   <label for="correo" >Correo Electronico: </label>
+   <input type="email" size="20"  class="form-control" placeholder="Correo Electronico" required  autofocus id="correo" name="correo" />
    <br/>
 
-	<label for="password">Password: </label>
-	<input type="password" size="20" id="password" name="password" />
+	<label for="password">Contraseña: </label>
+	<input type="password" size="20"class="form-control" placeholder="Contraseña" required id="password" name="password" />
 	<br/>
 
 
-	<input type="submit" value="Loguearse" />
+	<input type="submit" class="btn btn-primary" value="Loguearse" />
 	</form>
 	
 		

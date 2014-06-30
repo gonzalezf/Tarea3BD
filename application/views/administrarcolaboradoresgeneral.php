@@ -28,6 +28,11 @@ foreach($groups as $row)
 
 
 }
+echo '<tr>';
+echo'<a href="/Jim/index.php/vercolaboradores/index/0"> Todos Los Colaboradores </a>';
+
+echo '</tr>';
+
 echo '</table>';	
 ?>
 

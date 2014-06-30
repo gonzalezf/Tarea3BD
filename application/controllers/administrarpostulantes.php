@@ -17,7 +17,9 @@
 
         }
         else{
-            $this->load->view('administrarpostulantes');// terminar! redireccionar a area en especifica
+            $id_area = $this->user->ObtenerIdAreaParticipante($id_participante);
+            Redirect('verpostulantes/index/'.$id_area.'');
+           // $this->load->view('administrarpostulantes');// terminar! redireccionar a area en especifica
         } 
 
         }

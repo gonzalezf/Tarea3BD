@@ -1,0 +1,7 @@
+DROP VIEW IF EXISTS View_seleccionados_area;
+
+
+CREATE VIEW View_seleccionados_area AS
+    SELECT usuario.apellido,usuario.nombre,usuario.rol,participante.id_participante, usuario.codigo_carrera, usuario.correo, usuario.telefono, participante.talla_polera, participante_area.id_area 
+    FROM usuario, participante, participante_area 
+    WHERE usuario.rol = participante.rol and participante.id_participante = participante_area.id_participante and usuario.id_campus = 1 and id_area = 9

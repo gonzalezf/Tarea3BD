@@ -12,6 +12,8 @@
 
 
 <?php
+
+
 ?>
 <div class="row">
 
@@ -82,6 +84,7 @@ echo '</tbody>';
   </div>
     <div class="col-md-10">
 <?php
+
 echo '<table class="table table-hover">';
 //var_dump($groups);
 ?>
@@ -97,7 +100,7 @@ echo '<table class="table table-hover">';
 	Rol
 	</th>
 		<th>
-	Id postulante
+	Id participante
 	</th>
 		<th>
 	Codigo Carrera
@@ -112,10 +115,18 @@ echo '<table class="table table-hover">';
 	Talla Polera
 	</th>
 		<th>
-	Id Area
+	Area 1 
 	</th>
-
-
+	
+	<th>
+	Area 2
+	</th>
+	<th>
+	Area 3
+	</th>
+	<th>
+	Editar Polera
+	</th>
 	</tr>
 </thead>
 <tbody>
@@ -127,10 +138,39 @@ $this->load->model('user');
 foreach($groups as $row)
 {
 	//              echo '<option value="'.$row->description.'">'.$row->description.'</option>';
+	$area1 = '-';
+		$area2 = '-';
+		$area3 = '-';
 
-	
+	$arreglo = array();
+	$arreglo = $this->user->ObtenerAreasSeleccionado($row->id_participante);
+	$contador = 0;
 
-	echo '<tr>';
+	foreach($arreglo as $row2)
+	{
+		if($contador == 0){
+			$area1 = $row2->id_area;
+			$id_area = $area1;
+			$contador = 1;
+			continue;
+		}
+		if($contador == 1){
+			$area2 = $row2->id_area;
+			$contador = 2;
+
+			continue;
+		}
+		if($contador == 2){
+			$area3 = $row2->id_area;
+			$contador = 0;
+			continue;
+
+		}
+	}
+	if(strcmp($area1,'-')!=0){
+
+
+		echo '<tr>';
 
 	echo '<td>';
 	$apellido = "apellido";
@@ -173,23 +213,58 @@ $rol = "rol";
 	
 	echo''.$row->talla_polera.'';
 		echo '</td>';
-echo '<td>';
 	
-	echo''.$row->id_area.'';
-		echo '</td>';
 	echo '<td>';
-	echo '<a href="/jim/index.php/editarpolera/index/'.$row->id_participante.'/'.$id_area.' " >Editar Polera </a>';
+	
+			$contador = 0;
+	if(strcmp($area1,'-')!=0){
+		echo''.$this->user->RetornarNombreArea($area1).'';	
+	}
+	else{
+		echo $area1;
+	}
+
+		echo '</td>';
+
+		echo '<td>';
+		if(strcmp($area2,'-')!=0){
+		echo''.$this->user->RetornarNombreArea($area2).'';	
+	}
+	else{
+		echo $area2;
+	}
+		echo '</td>';
+		echo '<td>';
+	
+		if(strcmp($area3,'-')!=0){
+		echo''.$this->user->RetornarNombreArea($area3).'';	
+	}
+	else {
+		echo $area3;
+	}
+		echo '</td>';
+	
+	echo '<td>';
+	echo '<a href="/jim/index.php/editarpolera/index/'.$row->id_participante.'/0 " >Editar Polera </a>';
 	echo '</td>';
 
 	
 
 	
 	
+
+	}
+	
  
 }
 echo '</tbody>';
 echo '</table>';	
 ?>
+
+
+
+    </div>
+</div>
 
 
 

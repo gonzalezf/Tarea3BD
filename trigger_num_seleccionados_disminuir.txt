@@ -1,0 +1,30 @@
+DROP TRIGGER IF EXISTS trigger_num_seleccionados_disminuir ON participante_area;
+DROP TRIGGER IF EXISTS trigger_num_seleccionados_disminuir ON participante_area;
+
+CREATE OR REPLACE FUNCTION DisminuirColaboradores()
+RETURNS trigger AS 
+$body$
+DECLARE 
+ aux INT;
+
+BEGIN
+	SELECT p.id_participante INTO aux
+	FROM AREA a, PARTICIPANTE_AREA p
+	WHERE p.id_area = a.id_area; 
+	IF TG_OP = 'DELETE' 
+	THEN
+               
+			UPDATE AREA 
+			SET N_COLABORADORES = N_COLABORADORES -1
+			WHERE id_area = old.id_area;
+		END IF;
+      RETURN NULL;
+END; 
+$body$
+LANGUAGE plpgsql;
+
+
+CREATE TRIGGER Trigger_num_seleccionados_disminuir
+			AFTER DELETE ON PARTICIPANTE_AREA
+			FOR EACH ROW
+			EXECUTE PROCEDURE DisminuirColaboradores();

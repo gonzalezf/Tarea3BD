@@ -147,7 +147,17 @@ public function ObtenerIdPostulante($rol)
      // return $variable[0]->'id_area';
       return $variable[0]->$columna;
     }
-
+      public function ObtenerIdAreaParticipante($id_participante)
+    {
+      $this->db->select('id_area');
+      $this->db->from('participante_area');
+      $this->db->where('id_participante',$id_participante);
+      $query = $this->db->get();
+      $variable=  $query->result();
+      $columna = 'id_area';
+     // return $variable[0]->'id_area';
+      return $variable[0]->$columna;
+    }
     function RegistrarUsuario()
     {
 
@@ -331,6 +341,8 @@ public function ObtenerIdPostulante($rol)
  
       return $id_area;
     }
+
+
 
     public function ObtenerIdCoordinador($rol)
     {
@@ -662,7 +674,42 @@ public function ObtenerEsGeneral($id_participante)
       $query = $this->db->query('SELECT id_area, nombre from area');
       return $query->result();
     }
-    function MostrarNoticiasColaborador($id_participante){
+
+    function ObtenerAreasPostuladas($id_postulante)
+    {
+      $query = $this->db->query("select id_area from postulacion where id_postulante = '".$id_postulante."'");
+      return $query->result();
+    }
+    function ObtenerAreasSeleccionado($id_participante)
+    {
+      $query = $this->db->query("select id_area from participante_area where id_participante = '".$id_participante."'");
+      return $query->result();
+    }
+
+     public function EstadisticasPoleras()
+    {
+      $query = $this->db->query("select talla_polera, count(talla_polera) from usuario, participante where usuario.rol = participante.rol and usuario.id_campus = '".$this->session->userdata('id_campus')."'  group by talla_polera");
+      return $query->result();
+    }
+
+    public function EstadisticasCarreras()
+    {
+      $query = $this->db->query("select carrera.codigo_carrera,COUNT(participante.id_participante) from participante,usuario,carrera where carrera.codigo_carrera = usuario.codigo_carrera and usuario.rol = participante.rol  and usuario.id_campus = '".$this->session->userdata('id_campus')."' group by carrera.codigo_carrera ");
+      return $query->result();
+    }
+
+    public function EstadisticasCarrerasArea($id_area)
+    {
+      $query = $this->db->query("select carrera.codigo_carrera,COUNT(participante_area.id_participante) from participante,usuario,carrera,participante_area where carrera.codigo_carrera = usuario.codigo_carrera and usuario.rol = participante.rol and participante.id_participante = participante_area.id_participante and participante_area.id_area = '".$id_area."'  and usuario.id_campus = '".$this->session->userdata('id_campus')."' group by carrera.codigo_carrera  ");
+      return $query->result();
+    }
+
+    public function EstadisticasPolerasArea($id_area)
+    {
+      $query=$this->db->query("select talla_polera, count(talla_polera) from participante, participante_area, usuario  where usuario.rol = participante.rol and  participante.id_participante = participante_area.id_participante and participante_area.id_area = '".$id_area."' and usuario.id_campus = '".$this->session->userdata('id_campus')."' group by talla_polera");
+      return $query->result();
+    }
+        function MostrarNoticiasColaborador($id_participante){
       //ver las areas en que ha sido seleccionado
       $query = $this->db->query('select id_area from participante_area where id_participante = 25');
       $groups = $query->result();
@@ -713,6 +760,22 @@ public function ObtenerEsGeneral($id_participante)
       return $variable[0]->$columna;
     }
 
+        public function RetornarNombreCarrera($codigo_carrera){
+    $query = $this->db->query(" select nombre from  carrera where codigo_carrera = '".$codigo_carrera."' ");
+
+      $columna = 'nombre';
+      $variable = $query->result();
+      return $variable[0]->$columna;
+    }
+        public function RetornarNombreArea($id_area){
+    $query = $this->db->query(" select nombre from area where id_area = '".$id_area."' ");
+
+      $columna = 'nombre';
+      $variable = $query->result();
+      return $variable[0]->$columna;
+    }
+
+
      public function ObtenerNombreConRol($rol){
       $query = $this->db->query(" select nombre from   usuario where rol = '".$rol."' ");
       $columna = 'nombre';
@@ -738,6 +801,16 @@ public function ObtenerEsGeneral($id_participante)
     
       return $query->result();
     }
+      function ObtenerTodosLosColaboradores($id_campus)
+    {
+     //         $query = $this->db->query("  select usuario.apellido, usuario.nombre,usuario.rol,postulacion.motivo, postulante.id_postulante, usuario.codigo_carrera, postulacion.preferencia from usuario,postulante,postulacion,area where usuario.rol = postulante.rol and postulante.id_postulante = postulacion.id_postulante and postulacion.id_area = area.id_area and usuario.id_campus = '".$id_campus."' and area.id_area = '".$id_area."'");
+
+     // $query = $this->db->query("select usuario.apellido, usuario.nombre,usuario.rol,participante.id_participante, usuario.codigo_carrera, usuario.correo, usuario.telefono, participante.talla_polera,participante_area.id_area from usuario, participante,participante_area where usuario.rol = participante.rol and participante.id_participante = participante_area.id_participante  and id_area = '".$id_area."'");
+      $query = $this->db->query("select usuario.apellido, usuario.nombre,usuario.rol,participante.id_participante, usuario.codigo_carrera, usuario.correo, usuario.telefono, participante.talla_polera from usuario, participante where usuario.rol = participante.rol and usuario.id_campus  = '".$id_campus."'");
+    
+      return $query->result();
+    }
+
 
      function ObtenerTodasLasNoticias($id_campus)
     {

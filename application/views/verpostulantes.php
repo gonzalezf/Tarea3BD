@@ -9,7 +9,7 @@
    <h1>Postulantes </h1>
 
 <?php
-echo '<table class="table table-hover">';
+echo '<table class="table table-hover" style="fontsize:95%;">';
 //var_dump($groups);
 ?>
 <thead>
@@ -39,7 +39,10 @@ echo '<table class="table table-hover">';
 	Estado
 	</th>
 		<th>
-	Opcion
+	Seleccionar
+	</th>
+	<th>
+	Deseleccionar
 	</th>
 		<th>
 	otra area
@@ -125,6 +128,84 @@ $rol = "rol";
 
 	echo'<a href="/jim/index.php/seleccionar/deseleccionar/'.$id_area.'/'.$row->$rol.'"> DESELECCIONAR </a>';
 		echo '</td>';
+		$arreglo = array();
+		//array_push($arreglo, $this->user->ObtenerAreasPostuladas($row->id_postulante));
+		$arreglo = $this->user->ObtenerAreasPostuladas($row->id_postulante);
+		//var_dump($arreglo); 
+		$area2 = '-';
+		$area3 = '-';
+		$contador = 0;
+		foreach($arreglo as $row2){
+			$areapostulada = $row2->id_area;
+			if(strcmp($areapostulada,$id_area)!=0){
+				if($contador == 0){
+					$area2 = $areapostulada;
+					$contador = 1;
+				}
+				else{
+					$area3 = $areapostulada;
+
+				}
+			}
+
+		
+		}
+		echo '<td>';
+					if(strcmp($area3,'-')!=0){
+			echo $this->user->RetornarNombreArea($area2);
+		}
+		else {
+			echo $area2;
+		}
+
+
+		echo '</td>';
+		echo '<td>';
+		if(strcmp($area2,'-')!=0){
+				if($this->user->VerificarParticipacion($row->$rol)==0){
+					echo 'no seleccionado :O '.$this->user->VerificarParticipacion($row->rol).'';
+				}
+				else{
+		
+					$id_participante = $this->user->ObtenerIdParticipante($row->$rol);
+					echo $this->user->FueSeleccionado($area2, $id_participante);	
+				}
+		
+		}
+		else{
+			echo 'no postulo';
+		}
+
+		echo '</td>';
+		echo '<td>';
+
+		if(strcmp($area3,'-')!=0){
+			echo $this->user->RetornarNombreArea($area3);
+		}
+		else {
+			echo $area3;
+		}
+
+		echo '</td>';
+				echo '<td>';
+		if(strcmp($area3,'-')!=0){
+				if($this->user->VerificarParticipacion($row->$rol)==0){
+					echo 'no seleccionado :O '.$this->user->VerificarParticipacion($row->rol).'';
+				}
+				else{
+		
+					$id_participante = $this->user->ObtenerIdParticipante($row->$rol);
+					echo $this->user->FueSeleccionado($area3, $id_participante);	
+				}
+		
+		}
+		else{
+			echo 'no postulo';
+		}
+
+		echo '</td>';
+		
+
 
 }
 	

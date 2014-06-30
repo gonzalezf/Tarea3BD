@@ -1,0 +1,9 @@
+
+DROP VIEW IF EXISTS View_seleccionados;
+
+
+CREATE VIEW View_seleccionados AS
+    SELECT usuario.apellido,usuario.nombre,usuario.rol,participante.id_participante, usuario.codigo_carrera, usuario.correo, usuario.telefono, participante.talla_polera
+    FROM usuario, participante
+    WHEREusuario.rol = participante.rol and usuario.id_campus  = 1
+
