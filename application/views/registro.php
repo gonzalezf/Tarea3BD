@@ -100,7 +100,7 @@ h3 {
 -->
                 <?php 
                 $options = array(
-                      '0' => 'Escoge tu carrera.. ',
+           
                       '73' => 'Informatica',
                       '11' => 'Civil',
                       '04' => 'Plan Comun',
@@ -109,7 +109,7 @@ h3 {
                       '66'=>'Comercial',
                       '60' => 'Industrial'
                   );
-                echo form_dropdown('codigocarrera', $options, '0');
+                echo form_dropdown('codigocarrera', $options, '73');
 
                 ?>
            		</tr> 
@@ -125,24 +125,100 @@ h3 {
             	<tr>
             	<tr>
                 <td>Telefono: </td>
-                <td><input type="text" name="telefono"></input></td>
-           		</tr>   
+                <td><input type="text"  required class="form-control" name="telefono"></input></td>
+           		</tr> 
+                           <tr>
+                <td>Preferencia 1: </td>
+<!--                <td><input type="text" name="area"></input></td>
+    -->
+               
+              <td>
+              <?php echo '<select required class="form-control" name="preferencia1">'; 
+        
+               
+                  
+               
+               foreach($groups as $row){
+                  echo '<option value="'.$row->nombre.'">'.$row->nombre.'</option>';
+
+
+                  }
+
+                 
+     
+                ?>
+              </select>
+              </td>
+        
+              </tr>   
+                           <tr>
+
+                <td>Preferencia 2: </td>
+<!--                <td><input type="text" name="area"></input></td>
+    -->
+               
+              <td>
+              <?php echo '<select required class="form-control" name="preferencia2">'; 
+        
+               
+                  
+               
+               foreach($groups as $row){
+                  echo '<option value="'.$row->nombre.'">'.$row->nombre.'</option>';
+
+
+                  }
+
+                 
+     
+                ?>
+              </select>
+              </td>
+        
+              </tr>   
+             <tr>
+
+                <td>Preferencia 3: </td>
+<!--                <td><input type="text" name="area"></input></td>
+    -->
+               
+              <td>
+              <?php echo '<select required class="form-control" name="preferencia3">'; 
+        
+               
+                  
+               
+               foreach($groups as $row){
+                  echo '<option value="'.$row->nombre.'">'.$row->nombre.'</option>';
+
+
+                  }
+
+                 
+     
+                ?>
+              </select>
+              </td>
+        
+              </tr>   
+
+  <!--
             	<tr>
                 <td>Preferencia 1: </td>
-                <td><input type="text" name="preferencia1"></input></td>
+                <td><input type="text"  required class="form-control" name="preferencia1"></input></td>
            		</tr>   
 
            		<tr>
                 <td>Preferencia 2: </td>
-                <td><input type="text" name="preferencia2"></input></td>
+                <td><input type="text" required class="form-control"  name="preferencia2"></input></td>
            		</tr>   
            		<tr>
                 <td>Preferencia 3: </td>
-                <td><input type="text" name="preferencia3"></input></td>
-           		</tr>  
+                <td><input type="text"  required class="form-control" name="preferencia3"></input></td>
+           		</tr>-->  
            		<tr>
                 <td>Contrasenna: </td>
-                <td><input type="text" name="contrasenna"></input></td>
+                <td><input type="password" name="contrasenna"></input></td>
            		</tr>  
            		<td>Explicanos porque quieres  participar: </td>
                 <td><input type="text" name="motivo"></input></td>

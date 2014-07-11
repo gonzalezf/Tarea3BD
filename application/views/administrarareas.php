@@ -2,6 +2,39 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
    <title>JIM 2015</title>
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.confirmareditarcomentario').click(function (e) {
+            e.preventDefault();
+            if (window.confirm("Esta seguro que desea editar el area ?")) {
+                location.href = this.href;
+            }
+        });
+    });
+
+
+</script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.confirmareliminarcomentario').click(function (e) {
+            e.preventDefault();
+            if (window.confirm("Esta seguro que desea eliminar el area?")) {
+                location.href = this.href;
+            }
+        });
+    });
+
+
+</script>
+
  </head>
  <body>
   <?php include('application/views/barra.php');
@@ -34,13 +67,13 @@ foreach($groups as $row)
 
 	echo '<tr>';
 	echo '<td>';
-	echo'<a href="'.$row->id_area.'">'.$row->nombre.'</a>';
+	echo $row->nombre;
 		echo '</td>';
 	echo '<td>';
-	echo '<a href="/jim/index.php/editararea/index/'.$row->id_area.'"> Editar </a>';
+	echo '<a class="confirmareditarcomentario" href="/jim/index.php/editararea/index/'.$row->id_area.'"> Editar </a>';
 		echo '</td>';
 	echo '<td>';
-	echo '<a href="/jim/index.php/eliminararea/index/'.$row->id_area.'"> Eliminar </a>';
+	echo '<a class="confirmareliminarcomentario" href="/jim/index.php/eliminararea/index/'.$row->id_area.'"> Eliminar </a>';
 	echo '</td>';
 	echo'</tr>';
 

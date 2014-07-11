@@ -11,16 +11,16 @@
      echo form_open('Editarnoticia/save'); //controlador/metodo
     ?>
         <table>
-                <td><input type="hidden" name="id_noticia" value=<?php echo $id_noticia?> ></input></td>
+                <td><input type="hidden" class="form-control" required  name="id_noticia" value=<?php echo $id_noticia?> ></input></td>
 
             	<tr>
                 <td>Titular:</td>
-                <td><input type="text" name="titulo"  value=<?php echo $InfoNoticia[0]->titulo?> ></input></td>
+                <td><input type="text" name="titulo" class="form-control" required   value=<?php echo $InfoNoticia[0]->titulo?> ></input></td>
              	</tr>
              	<tr>
               <tr>
                 <td>Contenido:</td>
-                <td><textarea rows="3" cols="53" name="contenido" ><?php echo $InfoNoticia[0]->contenido?></textarea> </td>
+                <td><textarea rows="3" cols="53" name="contenido" required class="form-control" ><?php echo $InfoNoticia[0]->contenido?></textarea> </td>
               </tr>
 
                           

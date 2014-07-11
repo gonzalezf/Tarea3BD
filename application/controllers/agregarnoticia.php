@@ -4,7 +4,11 @@
 
         function index()
         {
-            $this->load->view('Agregarnoticia');
+            $this->load->model('user');
+            
+                        $data['groups'] = $this->user->ObtenerTodasLasAreas();
+                        $this->load->view('Agregarnoticia',$data);
+
         }
         function save()
         {

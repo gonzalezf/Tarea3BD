@@ -11,7 +11,7 @@ class Home extends CI_Controller {
  function index()
  {
               $this->load->model('user');
-
+              $this->load->library('session');
    if($this->session->userdata('logged_in')) //si esta logueado...!
    {
      $session_data = $this->session->userdata('logged_in');
@@ -33,6 +33,7 @@ class Home extends CI_Controller {
         $this->load->view('home', $data); //se llama al controlador y se envia el arreglo con la info del usuario. el controllador es home
 
       }
+
       else
       {
 

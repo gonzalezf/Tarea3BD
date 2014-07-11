@@ -1,6 +1,8 @@
 <html>
 <head>
 <title>Agregar Coordinador</title>
+  <link rel="stylesheet" href="https://id.usm.cl/idp/static/bootstrap.css" />
+
 </head>
 <body>
  <?php include('application/views/barra.php');
@@ -14,27 +16,27 @@
 
               <tr>
                 <td>Nombre:</td>
-                <td><input type="text" name="nombre" ></input></td>
+                <td><input type="text" name="nombre" required placeholder="Nombre" size=30 class="form-control"></input></td>
               </tr>
               <tr>
         <td>Apellido:</td>
-                <td><input type="text" name="apellido" ></input></td>
+                <td><input type="text" name="apellido" placeholder="Apellido" size=30 class="form-control"required ></input></td>
                 </tr>
                 <tr>
 
                 <td>Rol:</td>
-                <td><input type="text" name="rol" ></input></td>
+                <td><input type="text" name="rol" placeholder="Rol Usm" size=20   pattern="^(\d{1,9})\-?([\dkK])$" class="form-control"required ></input></td>
         </tr>
         <tr>
                 <td>Rut: </td>
-                <td><input type="text" name="rut"></input></td>
+                <td><input type="text" placeholder="rut " name="rut" pattern="^0*(\d{1,3}(\.?\d{3})*)\-?([\dkK])$" required class="form-control"></input></td>
               </tr>    
               <tr>
                 <td>Carrera: (735 informatica) </td>
                 <!--<td><input type="text" name="codigocarrera"></input></td>-->
                                 <?php 
                 $options = array(
-                      '0' => 'Escoger  carrera.. ',
+               
                       '73' => 'Informatica',
                       '11' => 'Civil',
                       '04' => 'Plan Comun',
@@ -43,7 +45,7 @@
                       '66'=>'Comercial',
                       '60' => 'Industrial'
                   );
-                echo form_dropdown('codigocarrera', $options, '0');
+                echo form_dropdown('codigocarrera', $options, '73');
                 ?>
               </tr> 
               <tr>
@@ -53,12 +55,12 @@
               <tr>
               <tr>
                 <td>E-mail: </td>
-                <td><input type="text" name="email"></input></td>
+                <td><input type="email" name="email" placeholder="email "required class="form-control" ></input></td>
               </tr>   
               <tr>
               <tr>
                 <td>Telefono: </td>
-                <td><input type="text" name="telefono"></input></td>
+                <td><input type="text" requerid size=20 class="form-control"  placeholder = "telefono" required "telefono" pattern="([0-9-+]*)"name="telefono"></input></td>
               </tr>   
               <tr>
 
@@ -111,7 +113,7 @@
 
               <tr>
                 <td>Contrasenna: </td>
-                <td><input type="text" name="contrasenna"></input></td>
+                <td><input type="password" name="contrasenna" placeholder="Contrasenna" class="form-control" size=20 required ></input></td>
               </tr>  
             
 

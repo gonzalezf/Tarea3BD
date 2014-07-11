@@ -16,26 +16,26 @@
      echo form_open('Editararea/save'); //controlador/metodo
     ?>
         <table>
-                <td><input type="hidden" name="id_area" value=<?php echo $id_area?> ></input></td>
+                <td><input type="hidden" name="id_area" required class="form-control" value=<?php echo $id_area?> ></input></td>
 
             	<tr>
                 <td>Nombre:</td>
-                <td><input type="text" name="nombre" value=<?php echo $InfoArea[0]->nombre?> ></input></td>
+                <td><input type="text" name="nombre"  required class="form-control" value=<?php echo $InfoArea[0]->nombre?> ></input></td>
              	</tr>
              	<tr>
               <tr>
                 <td>Hora Inicio:</td>
-                <td><input type="text" name="inicio" value=<?php echo $InfoArea[0]->inicio?> ></input></td>
+                <td><input type="text" name="inicio" class="form-control" required value=<?php echo $InfoArea[0]->inicio?> ></input></td>
               </tr>
               <tr>
               <tr>
                 <td>Hora Finalizacion:</td>
-                <td><input type="text" name="final" value=<?php echo $InfoArea[0]->final?> ></input></td>
+                <td><input type="text" name="final"  required  class="form-control" value=<?php echo $InfoArea[0]->final?> ></input></td>
               </tr>
               <tr>
 
  				       <td>Numero Estimado de Participantes</td>
-                <td><input type="text" name="n_colaboradores_estimado" value=<?php echo $InfoArea[0]->n_colaboradores_estimado?> ></input></td>
+                <td><input type="text" name="n_colaboradores_estimado" required class="form-control" pattern="([0-9]*)" value=<?php echo $InfoArea[0]->n_colaboradores_estimado?> ></input></td>
                	</tr>
 
                

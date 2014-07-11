@@ -2,6 +2,36 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
    <title>JIM 2015</title>
+
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.confirmareditarcomentario').click(function (e) {
+            e.preventDefault();
+            if (window.confirm("Esta seguro que desea editar el coordinador?")) {
+                location.href = this.href;
+            }
+        });
+    });
+
+
+</script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.confirmareliminarcomentario').click(function (e) {
+            e.preventDefault();
+            if (window.confirm("Esta seguro que desea eliminar el coordinador?")) {
+                location.href = this.href;
+            }
+        });
+    });
+
+
+</script>
  </head>
  <body>
   <?php include('application/views/barra.php');
@@ -45,16 +75,16 @@ echo '<table class="table table-hover">';
 	echo $this->user->ObtenerApellidoConRol($row->rol);
 	echo '</td>';
 	echo '<td>';
-	echo'<a href="'.$row->rol.'">'.$row->rol.'</a>';
+	echo $row->rol;
 		echo '</td>';
 		echo '<td>';
 	echo''.$row->talla_polera.'';
 		echo '</td>';
 	echo '<td>';
-	echo '<a href="/jim/index.php/editarcoordinador/index/'.$row->rol.'"> Editar </a>';
+	echo '<a class="confirmareditarcomentario" href="/jim/index.php/editarcoordinador/index/'.$row->rol.'"> Editar </a>';
 		echo '</td>';
 	echo '<td>';
-	echo '<a href="/jim/index.php/eliminarcoordinador/index/'.$row->rol.'"> Eliminar </a>';
+	echo '<a class="confirmareliminarcomentario" href="/jim/index.php/eliminarcoordinador/index/'.$row->rol.'"> Eliminar </a>';
 	echo '</td>';
 	echo'</tr>';
 

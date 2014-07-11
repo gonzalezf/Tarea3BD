@@ -4,6 +4,7 @@
 
         function index()
         {
+            $this->load->model('user');
             $this->load->view('agregararea');
         }
         function save()

@@ -23,8 +23,11 @@
 <!-- Barra de coordinador-->
 <ul id="menu_wrap" class="Blue">
 <li class="button"><a href="/jim/index.php">Inicio </a></li>
+<?php 
+$this->load->model('user');
+$this->user->ObtenerEsGeneral($this->session->userdata('id_participante'));
 
-<?php if($this->user->ObtenerEsGeneral($this->session->userdata('id_participante'))==0){
+if($this->user->ObtenerEsGeneral($this->session->userdata('id_participante'))==0){
 
   echo '<li class="button"> <a href="/jim/index.php/administrarcoordinadores/index">Coordinadores de Area</a></li>';
   echo '<li class="button">    <a href="/jim/index.php/administrarareas/index">Areas</a></li>';

@@ -2,6 +2,36 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
    <title>JIM 2015</title>
+
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.confirmareditarcomentario').click(function (e) {
+            e.preventDefault();
+            if (window.confirm("Esta seguro que desea editar la noticia?")) {
+                location.href = this.href;
+            }
+        });
+    });
+
+
+</script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.confirmareliminarcomentario').click(function (e) {
+            e.preventDefault();
+            if (window.confirm("Esta seguro que desea eliminar la noticia?")) {
+                location.href = this.href;
+            }
+        });
+    });
+
+
+</script>
  </head>
  <body>
   <?php include('application/views/barra.php');
@@ -47,10 +77,10 @@ foreach($groups as $row)
 	echo''.$row->contenido.'';
 		echo '</td>';
 	echo '<td>';
-	echo '<a href="/jim/index.php/editarnoticia/index/'.$row->id_noticia.'"> Editar </a>';
+	echo '<a class="confirmareditarcomentario" href="/jim/index.php/editarnoticia/index/'.$row->id_noticia.'"> Editar </a>';
 		echo '</td>';
 	echo '<td>';
-	echo '<a href="/jim/index.php/eliminarnoticia/index/'.$row->id_noticia.'"> Eliminar </a>';
+	echo '<a class="confirmareliminarcomentario" href="/jim/index.php/eliminarnoticia/index/'.$row->id_noticia.'"> Eliminar </a>';
 	echo '</td>';
 		
 	

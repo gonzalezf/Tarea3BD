@@ -5,9 +5,12 @@ class Registro extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('registro');
-		$this->load->library('form_validation');
+		$this->load->model('user');
 
+				$data['groups'] = $this->user->ObtenerTodasLasAreas();
+
+		$this->load->library('form_validation');
+				$this->load->view('registro',$data);
 
 	}
 
@@ -16,21 +19,12 @@ class Registro extends CI_Controller {
 		$this->load->model('user'); //llamamos modelo
 
 
-                $this->form_validation->set_rules('codigocarrera', 'codigocarrera', 'required');
 
 		if($this->input->post('submit'))
 		{
-			if ($this->form_validation->run() == FALSE)
-					{
-						$this->load->view('registro');
-					}
-					else
-
-					{
+				
 					$this->user->RegistrarUsuario();
 					Redirect('Inicio'); //redirigimos al inicio!
-					}
-
 			
 		}
 		

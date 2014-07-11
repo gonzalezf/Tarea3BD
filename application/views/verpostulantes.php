@@ -151,8 +151,9 @@ $rol = "rol";
 		
 		}
 		echo '<td>';
-					if(strcmp($area3,'-')!=0){
-			echo $this->user->RetornarNombreArea($area2);
+					if(strcmp($area2,'-')!=0){
+					//	echo $area2;
+							echo $this->user->RetornarNombreArea($area2);
 		}
 		else {
 			echo $area2;
@@ -163,7 +164,7 @@ $rol = "rol";
 		echo '<td>';
 		if(strcmp($area2,'-')!=0){
 				if($this->user->VerificarParticipacion($row->$rol)==0){
-					echo 'no seleccionado :O '.$this->user->VerificarParticipacion($row->rol).'';
+					echo 'no seleccionado'.$this->user->VerificarParticipacion($row->rol).'';
 				}
 				else{
 		
@@ -180,6 +181,7 @@ $rol = "rol";
 		echo '<td>';
 
 		if(strcmp($area3,'-')!=0){
+	
 			echo $this->user->RetornarNombreArea($area3);
 		}
 		else {
@@ -190,7 +192,7 @@ $rol = "rol";
 				echo '<td>';
 		if(strcmp($area3,'-')!=0){
 				if($this->user->VerificarParticipacion($row->$rol)==0){
-					echo 'no seleccionado :O '.$this->user->VerificarParticipacion($row->rol).'';
+					echo 'no seleccionado '.$this->user->VerificarParticipacion($row->rol).'';
 				}
 				else{
 		

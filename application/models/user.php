@@ -587,6 +587,22 @@ public function ObtenerEsGeneral($id_participante)
        $this->db->update('usuario',$infousuario);  
        $this->db->where('rol',$rol);  
        $this->db->update('participante',$infotablaparticipante);
+       $infotablacoordinador = array(
+        'id_participante' => $id_participante,
+        'es_general' => $es_general
+          );
+
+
+       $infotablaparticipantearea = array(
+          'id_participante' => $id_participante,
+          'id_area' => $this->user->ObtenerIdArea($area)
+        );
+       $this->db->where('id_participante',$id_participante);
+       $this->db->update('participante_area',$infotablaparticipantearea);
+
+        $this->db->where('id_participante',$id_participante);
+        $this->db->update('coordinador',$infotablacoordinador);
+       
    //    $this->db->where('rol',$rol);
      //  $this->db->update('coordinador',$infotablacoordinador);
     }
@@ -691,6 +707,11 @@ public function ObtenerEsGeneral($id_participante)
       $query = $this->db->query("select talla_polera, count(talla_polera) from usuario, participante where usuario.rol = participante.rol and usuario.id_campus = '".$this->session->userdata('id_campus')."'  group by talla_polera");
       return $query->result();
     }
+    function ObtenerCantidadSeleccionadas($id_participante)
+    {
+      $query = $this->db->query("select count(id_participante) from participante_area  where id_participante = '".$id_participante."'");
+      return $query->result()->count;
+    }
 
     public function EstadisticasCarreras()
     {
@@ -747,7 +768,7 @@ public function ObtenerEsGeneral($id_participante)
     {
 
     //  $query = $this->db->query("select usuario.apellido, usuario.nombre,usuario.rol,postulacion.motivo, postulante.id_postulante, usuario.codigo_carrera, postulacion.preferencia from usuario,postulante,postulacion,area where usuario.rol = postulante.rol and postulante.id_postulante = postulacion.id_postulante and postulacion.id_area = area.id_area and area.id_area = '".$id_area."'");
-              $query = $this->db->query("  select usuario.apellido, usuario.nombre,usuario.rol,postulacion.motivo, postulante.id_postulante, usuario.codigo_carrera, postulacion.preferencia from usuario,postulante,postulacion,area where usuario.rol = postulante.rol and postulante.id_postulante = postulacion.id_postulante and postulacion.id_area = area.id_area and usuario.id_campus = '".$id_campus."' and area.id_area = '".$id_area."'");
+              $query = $this->db->query("  select usuario.apellido, usuario.nombre,usuario.rol,postulacion.motivo, postulante.id_postulante, usuario.codigo_carrera, postulacion.preferencia from usuario,postulante,postulacion,area where usuario.rol = postulante.rol and postulante.id_postulante = postulacion.id_postulante and postulacion.id_area = area.id_area and usuario.id_campus = '".$id_campus."' and area.id_area = '".$id_area."' order by usuario.apellido");
 
       return $query->result();
     }
@@ -772,8 +793,11 @@ public function ObtenerEsGeneral($id_participante)
 
       $columna = 'nombre';
       $variable = $query->result();
+      
       return $variable[0]->$columna;
     }
+
+
 
 
      public function ObtenerNombreConRol($rol){
@@ -797,7 +821,7 @@ public function ObtenerEsGeneral($id_participante)
      //         $query = $this->db->query("  select usuario.apellido, usuario.nombre,usuario.rol,postulacion.motivo, postulante.id_postulante, usuario.codigo_carrera, postulacion.preferencia from usuario,postulante,postulacion,area where usuario.rol = postulante.rol and postulante.id_postulante = postulacion.id_postulante and postulacion.id_area = area.id_area and usuario.id_campus = '".$id_campus."' and area.id_area = '".$id_area."'");
 
      // $query = $this->db->query("select usuario.apellido, usuario.nombre,usuario.rol,participante.id_participante, usuario.codigo_carrera, usuario.correo, usuario.telefono, participante.talla_polera,participante_area.id_area from usuario, participante,participante_area where usuario.rol = participante.rol and participante.id_participante = participante_area.id_participante  and id_area = '".$id_area."'");
-      $query = $this->db->query("select usuario.apellido, usuario.nombre,usuario.rol,participante.id_participante, usuario.codigo_carrera, usuario.correo, usuario.telefono, participante.talla_polera,participante_area.id_area from usuario, participante,participante_area where usuario.rol = participante.rol and participante.id_participante = participante_area.id_participante and usuario.id_campus = '".$id_campus."' and id_area = '".$id_area."'");
+      $query = $this->db->query("select usuario.apellido, usuario.nombre,usuario.rol,participante.id_participante, usuario.codigo_carrera, usuario.correo, usuario.telefono, participante.talla_polera,participante_area.id_area from usuario, participante,participante_area where usuario.rol = participante.rol and participante.id_participante = participante_area.id_participante and usuario.id_campus = '".$id_campus."' and id_area = '".$id_area."' order by usuario.apellido");
     
       return $query->result();
     }
@@ -806,7 +830,7 @@ public function ObtenerEsGeneral($id_participante)
      //         $query = $this->db->query("  select usuario.apellido, usuario.nombre,usuario.rol,postulacion.motivo, postulante.id_postulante, usuario.codigo_carrera, postulacion.preferencia from usuario,postulante,postulacion,area where usuario.rol = postulante.rol and postulante.id_postulante = postulacion.id_postulante and postulacion.id_area = area.id_area and usuario.id_campus = '".$id_campus."' and area.id_area = '".$id_area."'");
 
      // $query = $this->db->query("select usuario.apellido, usuario.nombre,usuario.rol,participante.id_participante, usuario.codigo_carrera, usuario.correo, usuario.telefono, participante.talla_polera,participante_area.id_area from usuario, participante,participante_area where usuario.rol = participante.rol and participante.id_participante = participante_area.id_participante  and id_area = '".$id_area."'");
-      $query = $this->db->query("select usuario.apellido, usuario.nombre,usuario.rol,participante.id_participante, usuario.codigo_carrera, usuario.correo, usuario.telefono, participante.talla_polera from usuario, participante where usuario.rol = participante.rol and usuario.id_campus  = '".$id_campus."'");
+      $query = $this->db->query("select usuario.apellido, usuario.nombre,usuario.rol,participante.id_participante, usuario.codigo_carrera, usuario.correo, usuario.telefono, participante.talla_polera from usuario, participante where usuario.rol = participante.rol and usuario.id_campus  = '".$id_campus."' order by usuario.apellido");
     
       return $query->result();
     }
@@ -853,11 +877,19 @@ public function ObtenerEsGeneral($id_participante)
 
       return $query->result();
     }
-     function EliminarArea($id_area)
+     function EliminarArea($id_area) //si hay error en ver postulantes, es porque se ve un area que no existe.
     {//revisar!
 //      $query = $this->db->query('SELECT nombre, inicio,final, n_colaboradores_estimado from area where id_area='.$id_area.'');
+     
+     $this->db->where('id_area',$id_area);
+     $this->db->delete('postulacion');
+     $this->db->where('id_area',$id_area);
+     $this->db->delete('noticias');
+      $this->db->where('id_area',$id_area);
+      $this->db->delete('participante_area');
       $this->db->where('id_area',$id_area);
       $this->db->delete('area');
+      //
 
       
     }

@@ -74,14 +74,12 @@ foreach($estadisticacarrera as $row3)
 }
 echo '</tbody>';
 	echo '</table>';
-
-
-
 ?>
 
   </div>
     <div class="col-md-10">
 <?php
+
 echo '<table class="table table-hover">';
 //var_dump($groups);
 ?>
